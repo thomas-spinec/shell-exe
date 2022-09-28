@@ -19,6 +19,7 @@ then
 	echo "Vous avez choisi la division"
 else
 	echo "ce n'est pas un bon opérateur, essayer avec +, -, x ou /"
+	result=erreur
 fi
 
-echo "Result : "$result
+echo "Resultat : "$result
