@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/thomas/Documents/La_plateforme/git/shell-exe/Job9
+cd ~/Documents/La_plateforme/git/shell-exe/Job9
 
 #nb_ligne=`wc -l Shell_Userlist.csv`
 #for ((a=1; a = nb_ligne nb_ligne; a++))
@@ -31,14 +31,16 @@ do
 	then
 		echo "creation de l'utilisateur : $username"
 		#sudo useradd -m -d /home/$username $username
-		sudo useradd -m $username -p $password
+		pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+		sudo useradd -m -p "$pass" "$username"
 		echo "changement du role de : $username"
 		sudo usermod -aG sudo $username
 		#echo $username:$password | chpasswd
 	else 
 		echo "creation de l'utilisateur : $username"
 		#sudo useradd -m -d /home/$username $username
-		sudo useradd -m $username -p $password
+		pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+		sudo useradd -m -p "$pass" "$username"
 		#echo "$username:$password" | chpasswd
 	fi
 done < <(tail -n +2 Shell_Userlist.csv)
